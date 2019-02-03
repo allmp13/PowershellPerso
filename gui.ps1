@@ -51,6 +51,6 @@ function annuler(){
  }
 
 
-Write-Output "D�but"
+Write-Output "Début"
 $Result = jmd
 
