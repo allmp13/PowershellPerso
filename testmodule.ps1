@@ -1,0 +1,3 @@
+﻿Clear-host
+Get-Command 
+
