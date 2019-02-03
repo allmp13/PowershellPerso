@@ -39,15 +39,6 @@ $FORM.controls.AddRange(@($OK,$Annuler,$TextBox1))
 
 $OK.Add_Click({ closeForm })
 $Annuler.Add_Click({ annuler })
-
- [void]$Form.ShowDialog()
-
- }
-
-
-Write-Output "Début"
-$Result = jmd
-
 function closeForm(){
     $Form.close()
     Write-Host $TextBox1.Text
@@ -55,3 +46,11 @@ function closeForm(){
 function annuler(){
     $TextBox1.Text="J'annule"
 }
+ [void]$Form.ShowDialog()
+
+ }
+
+
+Write-Output "Dï¿½but"
+$Result = jmd
+
