@@ -51,6 +51,5 @@ function annuler(){
  }
 
 
-Write-Output "DÃ©but"
-$Result = jmd
-
+Write-Output "Début"
+jmd
