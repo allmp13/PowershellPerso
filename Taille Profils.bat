@@ -1,4 +1,4 @@
-@Echo off
+rem @Echo off
 echo %~dp0
 echo %CD%
 cd /d %~dp0
