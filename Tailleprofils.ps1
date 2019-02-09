@@ -4,8 +4,8 @@ $pwd = "DELPHES"
 $database = "PAM3DATA"
 $connectionString = "Server=$dataSource;uid=$user; pwd=$pwd;Database=$database;Integrated Security=False;"
 Install-Module PSFolderSize
-Get-Date | Out-File c:\scripts\OK.txt -append -width 120
-foreach ($serverName in (get-content c:\scripts\servers.txt))
+Get-Date | Out-File ..\OK.txt -append -width 120
+foreach ($serverName in (get-content ..\servers.txt))
 {
 $serverName=$serverName.Substring(0,7)
 $serverName
@@ -27,13 +27,13 @@ if ($dateinventaire -lt (Get-Date).AddMonths(-4)) {$messageinventaire=$messagein
 $ping = new-object System.Net.Networkinformation.Ping 
 if($ping.send($serverName,"50").status -eq "Success")
 {
-$messageinventaire | Out-File c:\scripts\OK.txt -append -width 120
+$messageinventaire | Out-File ..\OK.txt -append -width 120
 $ret="\\" + $serverName + "\c$\users"
-Get-FolderSize -Path $ret | Out-File c:\scripts\OK.txt -append -width 120
+Get-FolderSize -Path $ret | Out-File ..\OK.txt -append -width 120
 }
 ELSE
 {
-    $messageinventaire  | Out-File c:\scripts\NOK.txt -append -width 120
+    $messageinventaire  | Out-File ..\NOK.txt -append -width 120
 }
 }
 

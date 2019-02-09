@@ -1,9 +1,9 @@
-rem @Echo off
+@Echo off
 echo %~dp0
 echo %CD%
-cd /d %~dp0
+pushd %~dp0
 powershell -ExecutionPolicy ByPass -File ./Tailleprofils.ps1
-copy ../NOK.txt ../Servers.txt
-del ../NOK.txt
+copy ..\NOK.txt ..\Servers.txt /y
+del ..\NOK.txt
 pause
 popd
