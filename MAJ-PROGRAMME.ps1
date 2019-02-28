@@ -1,4 +1,5 @@
 ﻿#Jean-Marc DAVID le 01/02/2019
+add-Type -AssemblyName system.data
 $anneeexercice='2019'
 $dataSource = "srvmssql-bi"
 $user = "PROG_FIN_GSI_ADMIN"
