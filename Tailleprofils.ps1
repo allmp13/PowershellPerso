@@ -22,14 +22,12 @@ foreach ($serverName in (get-content ..\servers.txt)) {
 
     #"Dernier inventaire le: " + $dataset.Tables[0].Rows[0].Item(0) 
 
-
-    $ping = new-object System.Net.Networkinformation.Ping 
-    if ((Test-Connection -computername $serverName -Count 1 -quie) -eq "Success"){
+    if ((Test-Connection -computername $serverName -Count 1 -quie) -eq "Success") {
         $messageinventaire | Out-File ..\OK.txt -append -width 120
         $ret = "\\" + $serverName + "\c$\users"
         Get-FolderSize -Path $ret | Out-File ..\OK.txt -append -width 120
     }
-    ELSE {
+    else {
         $messageinventaire | Out-File ..\NOK.txt -append -width 120
     }
 }
