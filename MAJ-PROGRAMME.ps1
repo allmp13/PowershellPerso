@@ -1,4 +1,9 @@
-﻿#Jean-Marc DAVID le 01/02/2019
+﻿########################################################
+#Jean-Marc DAVID le 01/02/2019
+# Pour le compiler en exe utiliser PS2EXE-GUI
+# Pour créer l'interface Graphique Utiliser POSHGUI.com
+
+
 add-Type -AssemblyName system.data
 $anneeexercice='2019'
 $dataSource = "srvmssql-bi"

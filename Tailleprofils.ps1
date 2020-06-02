@@ -1,9 +1,13 @@
-﻿$dataSource = "srvmssql-p"
+﻿$webclient=New-Object System.Net.WebClient
+$webclient.Proxy.Credentials = [System.Net.CredentialCache]::DefaultNetworkCredentials
+[Net.ServicePointManager]::SecurityProtocol = "tls12"
+
+$dataSource = "srvmssql-p"
 $user = "PAM"
 $pwd = "DELPHES"
 $database = "PAM3DATA"
 $connectionString = "Server=$dataSource;uid=$user; pwd=$pwd;Database=$database;Integrated Security=False;"
-Install-Module PSFolderSize -Force
+Install-Module PSFolderSize -Force 
 Get-Date | Out-File ..\OK.txt -append -width 120
 foreach ($serverName in (get-content ..\servers.txt)) {
     $serverName = $serverName.Substring(0, 7)
@@ -28,7 +32,7 @@ foreach ($serverName in (get-content ..\servers.txt)) {
     if ((Test-Connection -computername $serverName -Count 1 -quie) -eq "Success") {
         $messageinventaire | Out-File ..\OK.txt -append -width 120
         $ret = "\\" + $serverName + "\c$\users"
-        Get-FolderSize -Path $ret | Out-File ..\OK.txt -append -width 120
+        Get-FolderSize -BasePath $ret | Out-File ..\OK.txt -append -width 120
     }
     else {
         $messageinventaire | Out-File ..\NOK.txt -append -width 120
