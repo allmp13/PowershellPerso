@@ -14,7 +14,7 @@ $lastname = $Sheet.Cells.Item($i,1).Text
 $Firstname = $Sheet.Cells.Item($i,2).Text
 $username = $Sheet.Cells.Item($i,3).Text
 $groupe = $Sheet.Cells.Item($i,4).Text
-$Sheet.Cells.Item($i,22)="ligne $i"
+$Sheet.Cells.Item($i,22)="Ligne N°$i"
 $test = $Sheet.Cells.Item($i,22).Text
 
 
