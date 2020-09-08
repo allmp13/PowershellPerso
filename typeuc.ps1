@@ -3,6 +3,8 @@
 #
 
 #
+Clear-Host
+
 $ChassisTypes =
 @{
     1='Other'
@@ -43,6 +45,7 @@ $ChassisTypes =
     36='Stick PC'
 }
 
+
 $namespace = "root\CIMV2"
 
 $machines = New-Object System.Collections.ArrayList
@@ -50,21 +53,27 @@ $machines = New-Object System.Collections.ArrayList
 # TODO: add code to populate the machine list from user input, etc.
 #
 $machines. Add("LocalHost") | Out-Null
+<# 
+$machines. Add("B19U352") | Out-Null
+$machines. Add("B19U326") | Out-Null
+$machines. Add("B17U158") | Out-Null
+#>
+
 
 $list = New-Object System.Collections.ArrayList
 
 foreach ($machine in $machines)
 {
-    $obj = New-Object -Type PSObject | Select-Object SerialNumber, Manufacturer, UUID, BaseBoardProduct, ChassisTypes, Chassis, SystemFamily, SystemSKUNumber
-
+    $obj = New-Object -Type PSObject | Select-Object Name, SerialNumber, Manufacturer, UUID, BaseBoardProduct, ChassisTypes, Chassis, SystemFamily, SystemSKUNumber
+    $obj.name = $machine
     $obj.SerialNumber = Get-WmiObject -class Win32_Bios -computername $machine -namespace $namespace | Select-Object -ExpandProperty SerialNumber
     $obj.Manufacturer = Get-WmiObject -class Win32_Bios -computername $machine -namespace $namespace | Select-Object -ExpandProperty Manufacturer
-    $obj.UUID = Get-WmiObject Win32_ComputerSystemProduct | Select-Object -ExpandProperty UUID
-    $obj.BaseBoardProduct = Get-WmiObject Win32_BaseBoard | Select-Object -ExpandProperty Product
-    $obj.ChassisTypes = Get-WmiObject Win32_SystemEnclosure | Select-Object -ExpandProperty ChassisTypes
+    $obj.UUID = Get-WmiObject -class Win32_ComputerSystemProduct -computername $machine | Select-Object -ExpandProperty UUID
+    $obj.BaseBoardProduct = Get-WmiObject -class Win32_BaseBoard -computername $machine | Select-Object -ExpandProperty Product
+    $obj.ChassisTypes = Get-WmiObject -class Win32_SystemEnclosure -computername $machine | Select-Object -ExpandProperty ChassisTypes
     $obj.Chassis = $ChassisTypes[[int]$obj.ChassisTypes]
-    $obj.SystemFamily = Get-WmiObject Win32_ComputerSystem | Select-Object -ExpandProperty SystemFamily
-    $obj.SystemSKUNumber = Get-WmiObject Win32_ComputerSystem | Select-Object -ExpandProperty SystemSKUNumber
+    $obj.SystemFamily = Get-WmiObject -class Win32_ComputerSystem -computername $machine | Select-Object -ExpandProperty SystemFamily -ErrorAction SilentlyContinue
+    $obj.SystemSKUNumber = Get-WmiObject -class Win32_ComputerSystem -computername $machine | Select-Object -ExpandProperty SystemSKUNumber -ErrorAction SilentlyContinue
 
     $list.Add($obj) | Out-Null
 }

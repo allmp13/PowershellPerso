@@ -1,13 +1,13 @@
 ﻿Clear-Host
-$password = Cat c:\scripts\MonFichier.pwd | ConvertTo-SecureString
+$password = Get-Content c:\scripts\MonFichier.pwd | ConvertTo-SecureString
 $user = "ddsis-13\jmdavid"
 $credential = New-Object System.Management.Automation.PSCredential($user,$password)
 $session = New-PSSession -ConfigurationName Microsoft.Exchange –ConnectionUri http://srvcas1/powershell -Credential $credential
-$output=Import-PSSession $session -AllowClobber -DisableNameChecking
+Import-PSSession $session -AllowClobber -DisableNameChecking
 Import-Module ActiveDirectory
 
 #Get-ADOrganizationalUnit -Filter 'Name -like "*"' | FT Name, DistinguishedName -A
-New-ADUser -SamAccountName "glenjohn" -GivenName "Glen" -Surname "John" -DisplayName "Glen John" -Path 'CN=Users,DC=fabrikam,DC=local'
+#New-ADUser -SamAccountName "glenjohn" -GivenName "Glen" -Surname "John" -DisplayName "Glen John" -Path 'CN=Users,DC=fabrikam,DC=local'
 
 
 #get-distributiongroup | select name, Hiddenfromaddresslistsenabled | WHERE {$_.HiddenFromAddressListsEnabled -eq $true }

@@ -6,4 +6,4 @@ Get-WmiObject Win32_Computersystem
 Get-WmiObject Win32_Bios
 Get-WmiObject Win32_LogicalDisk
 Get-WmiObject Win32_MemoryDevice
-Get-WmiObject –class Win32_NetworkAdapterConfiguration
+Get-WmiObject -class Win32_NetworkAdapterConfiguration
